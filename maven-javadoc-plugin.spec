@@ -6,7 +6,7 @@
 
 Name:           %{?scl_prefix}%{pkg_name}
 Version:        2.9
-Release:        8.13%{?dist}
+Release:        8.14%{?dist}
 Summary:        Maven Javadoc Plugin
 
 License:        ASL 2.0
@@ -20,34 +20,34 @@ BuildRequires:  %{?scl_prefix_java_common}apache-commons-logging
 BuildRequires:  %{?scl_prefix_java_common}jakarta-commons-httpclient
 BuildRequires:  %{?scl_prefix_java_common}log4j
 BuildRequires:  %{?scl_prefix_java_common}maven-local
-BuildRequires:  maven30-maven-archiver
-BuildRequires:  maven30-maven-artifact
-BuildRequires:  maven30-maven-artifact-manager
-BuildRequires:  maven30-maven-common-artifact-filters
-BuildRequires:  maven30-maven-doxia-sink-api
-BuildRequires:  maven30-maven-doxia-sitetools
-BuildRequires:  maven30-maven-enforcer-plugin
-BuildRequires:  maven30-maven-model
-BuildRequires:  maven30-maven-plugin-annotations
-BuildRequires:  maven30-maven-plugin-plugin
-BuildRequires:  maven30-maven-plugin-testing-harness
-BuildRequires:  maven30-maven-project
-BuildRequires:  maven30-maven-resources-plugin
-BuildRequires:  maven30-maven-settings
-BuildRequires:  maven30-maven-shade-plugin
-BuildRequires:  maven30-maven-invoker
-BuildRequires:  maven30-maven-reporting-api
-BuildRequires:  maven30-maven-surefire-plugin
-BuildRequires:  maven30-maven-toolchain
-BuildRequires:  maven30-mvn(org.apache.maven.wagon:wagon-provider-api)
-BuildRequires:  maven30-modello
-BuildRequires:  maven30-plexus-archiver
-BuildRequires:  maven30-plexus-containers-container-default
-BuildRequires:  maven30-plexus-interactivity-api
-BuildRequires:  maven30-plexus-utils
+BuildRequires:  %{?scl_prefix}maven-archiver
+BuildRequires:  %{?scl_prefix}maven-artifact
+BuildRequires:  %{?scl_prefix}maven-artifact-manager
+BuildRequires:  %{?scl_prefix}maven-common-artifact-filters
+BuildRequires:  %{?scl_prefix}maven-doxia-sink-api
+BuildRequires:  %{?scl_prefix}maven-doxia-sitetools
+BuildRequires:  %{?scl_prefix}maven-enforcer-plugin
+BuildRequires:  %{?scl_prefix}maven-model
+BuildRequires:  %{?scl_prefix}maven-plugin-annotations
+BuildRequires:  %{?scl_prefix}maven-plugin-plugin
+BuildRequires:  %{?scl_prefix}maven-plugin-testing-harness
+BuildRequires:  %{?scl_prefix}maven-project
+BuildRequires:  %{?scl_prefix}maven-resources-plugin
+BuildRequires:  %{?scl_prefix}maven-settings
+BuildRequires:  %{?scl_prefix}maven-shade-plugin
+BuildRequires:  %{?scl_prefix}maven-invoker
+BuildRequires:  %{?scl_prefix}maven-reporting-api
+BuildRequires:  %{?scl_prefix}maven-surefire-plugin
+BuildRequires:  %{?scl_prefix}maven-toolchain
+BuildRequires:  %{?scl_prefix}mvn(org.apache.maven.wagon:wagon-provider-api)
+BuildRequires:  %{?scl_prefix}modello
+BuildRequires:  %{?scl_prefix}plexus-archiver
+BuildRequires:  %{?scl_prefix}plexus-containers-container-default
+BuildRequires:  %{?scl_prefix}plexus-interactivity-api
+BuildRequires:  %{?scl_prefix}plexus-utils
 BuildRequires:  %{?scl_prefix_java_common}qdox
 %if ! %{bootstrap}
-BuildRequires:  maven30-maven-javadoc-plugin
+BuildRequires:  %{?scl_prefix}maven-javadoc-plugin
 %endif
 
 
@@ -67,7 +67,7 @@ API documentation for %{pkg_name}.
 
 %prep
 %setup -q -n %{pkg_name}-%{version}
-%{?scl:scl enable maven30 %{scl} - <<"EOF"}
+%{?scl:scl enable %{scl} - <<"EOF"}
 set -e -x
 # Update source for use with newer doxia
 %patch0
@@ -87,7 +87,7 @@ sed -i -e "s|org.apache.maven.doxia.module.xhtml.decoration.render|org.apache.ma
 %{?scl:EOF}
 
 %build
-%{?scl:scl enable maven30 %{scl} - <<"EOF"}
+%{?scl:scl enable %{scl} - <<"EOF"}
 set -e -x
 %if ! %{bootstrap}
 %mvn_build -f
@@ -98,7 +98,7 @@ set -e -x
 %{?scl:EOF}
 
 %install
-%{?scl:scl enable maven30 %{scl} - <<"EOF"}
+%{?scl:scl enable %{scl} - <<"EOF"}
 set -e -x
 %mvn_install
 %{?scl:EOF}
@@ -114,6 +114,9 @@ set -e -x
 %endif
 
 %changelog
+* Mon Jan 11 2016 Michal Srb <msrb@redhat.com> - 2.9-8.14
+- maven33 rebuild #2
+
 * Sat Jan 09 2016 Michal Srb <msrb@redhat.com> - 2.9-8.13
 - maven33 rebuild
 
