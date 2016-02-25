@@ -6,7 +6,7 @@
 
 Name:           %{?scl_prefix}%{pkg_name}
 Version:        2.9
-Release:        8.14%{?dist}
+Release:        8.15%{?dist}
 Summary:        Maven Javadoc Plugin
 
 License:        ASL 2.0
@@ -19,7 +19,7 @@ BuildRequires:  %{?scl_prefix_java_common}apache-commons-lang
 BuildRequires:  %{?scl_prefix_java_common}apache-commons-logging
 BuildRequires:  %{?scl_prefix_java_common}jakarta-commons-httpclient
 BuildRequires:  %{?scl_prefix_java_common}log4j
-BuildRequires:  %{?scl_prefix_java_common}maven-local
+BuildRequires:  %{?scl_prefix}maven-local
 BuildRequires:  %{?scl_prefix}maven-archiver
 BuildRequires:  %{?scl_prefix}maven-artifact
 BuildRequires:  %{?scl_prefix}maven-artifact-manager
@@ -114,6 +114,9 @@ set -e -x
 %endif
 
 %changelog
+* Mon Feb 08 2016 Michal Srb <msrb@redhat.com> - 2.9-8.15
+- Fix BR on maven-local & co.
+
 * Mon Jan 11 2016 Michal Srb <msrb@redhat.com> - 2.9-8.14
 - maven33 rebuild #2
 
